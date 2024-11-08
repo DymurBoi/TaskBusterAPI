@@ -67,7 +67,7 @@ public class UserController {
 
     //LOGIN FUNCTIONALITY
     @PostMapping("/login")
-public UserEntity login(@RequestParam String email, @RequestParam String password) {
+    public UserEntity login(@RequestParam String email, @RequestParam String password) {
     try {
         return userService.loginUser(email, password);
     } catch (RuntimeException e) {
