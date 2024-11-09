@@ -6,10 +6,12 @@ import org.springframework.scheduling.config.Task;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -34,10 +36,23 @@ public class TaskEntity {
     public void setTag(TagEntity tag) {
         this.tag = tag;
     }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "to_do_listid")
+    private ToDoListEntity todoList;
+    
+    public ToDoListEntity getTodoList() {
+        return todoList;
+    }
+    public void setTodoList(ToDoListEntity todoList) {
+        this.todoList = todoList;
+    }
+
     public TaskEntity(){
         super();
     }
-    public TaskEntity(String title,String description, String status,LocalDateTime createdAt,LocalDateTime updatedAt,LocalDateTime dueDate){
+    public TaskEntity(String title,String description, String status,LocalDateTime createdAt,LocalDateTime updatedAt,LocalDateTime dueDate, ToDoListEntity todolist){
+        this.todoList = todolist;
         this.title=title;
         this.description=description;
         this.status=status;

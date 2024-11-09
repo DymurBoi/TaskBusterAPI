@@ -10,14 +10,17 @@ import org.springframework.stereotype.Service;
 
 import com.G2.taskbuster.entity.TagEntity;
 import com.G2.taskbuster.entity.TaskEntity;
+import com.G2.taskbuster.entity.ToDoListEntity;
 import com.G2.taskbuster.repository.TagRepository;
 import com.G2.taskbuster.repository.TaskRepository;
+import com.G2.taskbuster.repository.ToDoListRepository;
 
 @Service
 public class TaskService {
     @Autowired
     TaskRepository taskrepo;
     TagRepository tagrepo;
+    ToDoListRepository toDoListRepository;
     public TaskService(){
         super();
     }
@@ -26,15 +29,17 @@ public class TaskService {
         this.taskrepo=taskrepo;
         this.tagrepo=tagrepo;
     }
-    public TaskEntity postTask(TaskEntity task,int id){
+    public TaskEntity postTask(TaskEntity task,int tagId,int todoId){
         try{
-            TagEntity tag=tagrepo.findById(id);
-            if(tag!=null){
+            ToDoListEntity todolist = toDoListRepository.findById(todoId);
+            TagEntity tag=tagrepo.findById(tagId);
+            if(todolist !=null && tag != null){
+                task.setTodoList(todolist);
                 task.setTag(tag);
                 return taskrepo.save(task);
             }
             else{
-                throw new RuntimeException("Tag ID "+id+" not found.");
+                throw new RuntimeException("Tag ID "+tagId+" not found or To Do List ID "+todoId+"not found.");
             }
         }
         catch(Exception e){

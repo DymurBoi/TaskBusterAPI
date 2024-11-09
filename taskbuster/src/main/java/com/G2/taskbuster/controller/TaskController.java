@@ -25,7 +25,7 @@ public class TaskController {
     @PostMapping("/postTask")
     public TaskEntity postTask(@RequestBody TaskEntity task){
         int tagId=task.getTag().getTagId();
-        return tserv.postTask(task, tagId);
+        return tserv.postTask(task, tagId,task.getTodoList().getToDoListID());
     }
     @GetMapping("/getTask")
     public List<TaskEntity> getAllTasks(){
