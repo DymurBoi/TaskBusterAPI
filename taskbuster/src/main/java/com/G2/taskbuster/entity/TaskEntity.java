@@ -39,7 +39,7 @@ public class TaskEntity {
     @ManyToOne
     @JoinColumn(name = "todoListId", nullable = false)
     private ToDoListEntity todoList;
-
+    
     // Getters and Setters
     public int getTaskId() {
         return taskId;
