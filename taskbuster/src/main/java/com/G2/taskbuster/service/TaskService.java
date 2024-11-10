@@ -19,22 +19,25 @@ import com.G2.taskbuster.repository.ToDoListRepository;
 public class TaskService {
     @Autowired
     TaskRepository taskrepo;
+    @Autowired
     TagRepository tagrepo;
+    @Autowired
     ToDoListRepository toDoListRepository;
     public TaskService(){
         super();
     }
     @Autowired
-    public TaskService(TaskRepository taskrepo, TagRepository tagrepo){
+    public TaskService(TaskRepository taskrepo, TagRepository tagrepo, ToDoListRepository toDoListRepository){
         this.taskrepo=taskrepo;
         this.tagrepo=tagrepo;
+        this.toDoListRepository = toDoListRepository;
     }
     public TaskEntity postTask(TaskEntity task,int tagId,int todoId){
         try{
             ToDoListEntity todolist = toDoListRepository.findById(todoId);
             TagEntity tag=tagrepo.findById(tagId);
             if(todolist !=null && tag != null){
-                task.setTodoList(todolist);
+                task.setToDoList(todolist);
                 task.setTag(tag);
                 return taskrepo.save(task);
             }

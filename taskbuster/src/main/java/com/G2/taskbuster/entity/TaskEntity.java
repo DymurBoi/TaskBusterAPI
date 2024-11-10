@@ -38,21 +38,24 @@ public class TaskEntity {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "to_do_listid")
-    private ToDoListEntity todoList;
+    @JoinColumn(name = "toDoListID")
+    //@JsonInclude(JsonInclude.Include.ALWAYS)
+	private ToDoListEntity toDoList;
     
-    public ToDoListEntity getTodoList() {
-        return todoList;
+    public ToDoListEntity getToDoList() {
+        return this.toDoList;
     }
-    public void setTodoList(ToDoListEntity todoList) {
-        this.todoList = todoList;
+    public void setToDoList(ToDoListEntity toDoList) {
+        this.toDoList = toDoList;
     }
 
     public TaskEntity(){
         super();
     }
+
     public TaskEntity(String title,String description, String status,LocalDateTime createdAt,LocalDateTime updatedAt,LocalDateTime dueDate, ToDoListEntity todolist){
-        this.todoList = todolist;
+        super();
+        this.toDoList = todolist;
         this.title=title;
         this.description=description;
         this.status=status;
@@ -60,6 +63,7 @@ public class TaskEntity {
         this.updatedAt=updatedAt;
         this.dueDate=dueDate;
     }
+
     public String getTitle() {
         return title;
     }

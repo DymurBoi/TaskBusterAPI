@@ -39,8 +39,10 @@ public class ToDoListEntity {
     //@JsonInclude(JsonInclude.Include.ALWAYS)
 	private UserEntity user;
 
-    @OneToMany(fetch = FetchType.LAZY ,mappedBy = "todoList", cascade = CascadeType.ALL)
-    private List<TaskEntity> tasks;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "toDoList", cascade = CascadeType.ALL)
+    //@JsonManagedReference // Manage the reference
+	private List<TaskEntity> task;
+    
     // Constructors
     public ToDoListEntity() {
         super();

@@ -16,16 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.G2.taskbuster.entity.TaskEntity;
 import com.G2.taskbuster.service.TaskService;
+import com.G2.taskbuster.service.ToDoListService;
 
 @RestController
 @RequestMapping(method=RequestMethod.GET,path="/api/taskbuster")
 public class TaskController {
+    private final TaskService tserv;
     @Autowired
-    TaskService tserv;
+    public TaskController(TaskService tserv){
+        this.tserv = tserv;
+    }
+
     @PostMapping("/postTask")
     public TaskEntity postTask(@RequestBody TaskEntity task){
-        int tagId=task.getTag().getTagId();
-        return tserv.postTask(task, tagId,task.getTodoList().getToDoListID());
+        return tserv.postTask(task, task.getTag().getTagId(),task.getToDoList().getToDoListID());
     }
     @GetMapping("/getTask")
     public List<TaskEntity> getAllTasks(){
