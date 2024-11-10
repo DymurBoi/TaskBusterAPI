@@ -1,5 +1,6 @@
 package com.G2.taskbuster.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,10 +9,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class ToDoListEntity {
@@ -36,6 +39,10 @@ public class ToDoListEntity {
     //@JsonInclude(JsonInclude.Include.ALWAYS)
 	private UserEntity user;
 
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "toDoList", cascade = CascadeType.ALL)
+    //@JsonManagedReference // Manage the reference
+	private List<TaskEntity> task;
+    
     // Constructors
     public ToDoListEntity() {
         super();
@@ -68,7 +75,7 @@ public class ToDoListEntity {
         this.title = title;
     }
 
-    public String getDescription() {
+        public String getDescription() {
         return description;
     }
 
