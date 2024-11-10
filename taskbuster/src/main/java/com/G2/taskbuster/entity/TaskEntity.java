@@ -1,6 +1,7 @@
 package com.G2.taskbuster.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.scheduling.config.Task;
 
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -30,6 +32,9 @@ public class TaskEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_tag_id")
     private TagEntity tag;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "task", cascade = CascadeType.ALL)
+    private List<CommentEntity> comment;
+    
     public TagEntity getTag() {
         return tag;
     }
