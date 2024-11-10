@@ -61,7 +61,7 @@ public class ToDoListService {
         ToDoListEntity toDoList = new ToDoListEntity();
 
         try{
-            toDoList = toDoListRepository.findById(id).orElseThrow(() -> new RuntimeException("ToDo List ID " + id + " not found."));
+            toDoList = toDoListRepository.findById(id);
             toDoList.setTitle(newToDoListDetails.getTitle());
             toDoList.setDescription(newToDoListDetails.getDescription());
             toDoList.setUpdatedAt(newToDoListDetails.getUpdatedAt());
