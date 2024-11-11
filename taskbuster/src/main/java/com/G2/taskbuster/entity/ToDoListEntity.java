@@ -103,7 +103,6 @@ public class ToDoListEntity {
         this.updatedAt = LocalDateTime.now();
     }
 
-
     public UserEntity getUser(){
         return this.user;
     }

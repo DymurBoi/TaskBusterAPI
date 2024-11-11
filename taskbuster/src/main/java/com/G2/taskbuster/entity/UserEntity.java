@@ -18,7 +18,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
-
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -39,7 +38,7 @@ public class UserEntity {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at", nullable = true)
     private LocalDateTime updatedAt;
 
 
@@ -49,7 +48,7 @@ public class UserEntity {
 
 
     @ManyToOne
-    @JoinColumn(name = "admin_id", referencedColumnName = "adminId", nullable = false)
+    @JoinColumn(name = "admin_id", referencedColumnName = "adminId", nullable = true)
     @JsonBackReference
     private AdminEntity admin;
     
@@ -58,8 +57,9 @@ public class UserEntity {
         super();
     }
 
-    public UserEntity(int userId,String name, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UserEntity(AdminEntity admin, int userId,String name, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super();
+        this.admin=admin;
         this.userId = userId;
         this.name = name;
         this.email = email;
@@ -117,6 +117,14 @@ public class UserEntity {
         this.updatedAt = updatedAt;
     }
 
+    public AdminEntity getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(AdminEntity admin) {
+        this.admin = admin;
+    }
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -127,15 +135,5 @@ public class UserEntity {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
-
-    public AdminEntity getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(AdminEntity admin) {
-        this.admin = admin;
-    }
-
-   
 	
 }

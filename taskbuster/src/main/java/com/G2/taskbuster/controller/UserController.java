@@ -23,7 +23,7 @@ import com.G2.taskbuster.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins= "http://localhost:5173/")
+@CrossOrigin(origins= "http://localhost:3000")
 public class UserController {
 
     @Autowired
@@ -38,6 +38,12 @@ public class UserController {
     @PostMapping("/create")
     public UserEntity createUser(@RequestBody UserEntity user) {
         return userService.createUser(user);
+    }
+
+    @PostMapping("/postUser")
+    public UserEntity postUser(@RequestBody UserEntity user) {
+        int adminId = user.getAdmin().getAdminId();
+        return userService.postUser(user,adminId);
     }
 
     // Read all users
@@ -59,11 +65,17 @@ public class UserController {
         return userService.updateUserDetails(id, newUserDetails);
     }
 
+    @PutMapping("/putUser/{userId}")
+    public UserEntity putUser(@PathVariable int userId, @RequestBody UserEntity newUserRecord) {
+        return userService.putUserRecord(userId, newUserRecord);
+    }
+
     // Delete user by ID
     @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable int id) {
         return userService.deleteUser(id);
     }
+
 
     //LOGIN FUNCTIONALITY
     @PostMapping("/login")
