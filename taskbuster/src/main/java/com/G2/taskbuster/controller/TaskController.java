@@ -43,4 +43,9 @@ public class TaskController {
     public String deleteTask(@PathVariable int id){
         return tserv.deleteTask(id);
     }
+
+    @GetMapping("/getTasks")
+    public List<TaskEntity> getTasksByToDoListID(@RequestParam int toDoListID) {
+    return tserv.getTasksByToDoListID(toDoListID);
+    }
 }

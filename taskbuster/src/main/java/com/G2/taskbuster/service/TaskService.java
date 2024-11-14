@@ -99,4 +99,9 @@ public class TaskService {
     }
     return msg;
   }
+
+  //Find Task By todolistID
+  public List<TaskEntity> getTasksByToDoListID(int toDoListID) {
+    return taskrepo.findByToDoListId(toDoListID);
+}
 }
