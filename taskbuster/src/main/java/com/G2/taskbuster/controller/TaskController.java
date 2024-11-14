@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.G2.taskbuster.entity.TaskEntity;
+
 import com.G2.taskbuster.service.TaskService;
-import com.G2.taskbuster.service.ToDoListService;
+
 
 @RestController
 @RequestMapping(method=RequestMethod.GET,path="/api/taskbuster")
@@ -43,9 +44,9 @@ public class TaskController {
     public String deleteTask(@PathVariable int id){
         return tserv.deleteTask(id);
     }
-
     @GetMapping("/getTasks")
-    public List<TaskEntity> getTasksByToDoListID(@RequestParam int toDoListID) {
-    return tserv.getTasksByToDoListID(toDoListID);
+     public List<TaskEntity> getTaskByToDoListID(@RequestParam int toDoListID) {
+        return tserv.getTaskByToDoListID(toDoListID);
     }
+    
 }
