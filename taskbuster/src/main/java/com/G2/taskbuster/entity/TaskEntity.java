@@ -45,7 +45,7 @@ public class TaskEntity {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "toDoListID")
+    @JoinColumn(name = "toDoListID", referencedColumnName = "toDoListID")
     //@JsonInclude(JsonInclude.Include.ALWAYS)
 	private ToDoListEntity toDoList;
     
