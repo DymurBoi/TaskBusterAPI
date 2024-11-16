@@ -52,6 +52,11 @@ public class TaskService {
     public List<TaskEntity> getAllTasks(){
         return taskrepo.findAll();
     }
+
+    public List<TaskEntity> getTaskByToDoListID(int toDoListID){
+        return taskrepo.findByToDoListToDoListID(toDoListID);
+    }
+
     @SuppressWarnings("finally")
     public TaskEntity putTask(int taskId, TaskEntity newTask){
         TaskEntity task=new TaskEntity();

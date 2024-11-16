@@ -15,6 +15,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -43,7 +45,7 @@ public class TaskEntity {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "toDoListID")
+    @JoinColumn(name = "toDoListID", referencedColumnName = "toDoListID")
     //@JsonInclude(JsonInclude.Include.ALWAYS)
 	private ToDoListEntity toDoList;
     
@@ -108,5 +110,13 @@ public class TaskEntity {
     public int getTaskId() {
         return taskId;
     }
-    
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt=LocalDateTime.now();
+        this.updatedAt=LocalDateTime.now();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt=LocalDateTime.now();
+    }
 }

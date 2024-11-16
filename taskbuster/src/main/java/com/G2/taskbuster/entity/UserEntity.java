@@ -6,12 +6,16 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
@@ -42,6 +46,10 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user", cascade = CascadeType.ALL)
     //@JsonManagedReference // Manage the reference
 	private List<ToDoListEntity> toDolist;
+    @ManyToOne
+    @JoinColumn(name = "admin_id", referencedColumnName = "adminId", nullable = true)
+    @JsonBackReference
+    private AdminEntity admin;
     
     // Constructors
     public UserEntity() {
@@ -50,6 +58,7 @@ public class UserEntity {
 
     public UserEntity(int userId,String name, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super();
+        this.admin=admin;
         this.userId = userId;
         this.name = name;
         this.email = email;
