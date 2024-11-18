@@ -104,4 +104,16 @@ public class TaskService {
     }
     return msg;
   }
+  public TaskEntity getTaskById(int taskId) {
+    try {
+        TaskEntity task = taskrepo.findById(taskId);
+        if (task != null) {
+            return task;
+        } else {
+            throw new NoSuchElementException("Task not found with ID " + taskId);
+        }
+    } catch (NoSuchElementException e) {
+        throw new RuntimeException("Error occurred while fetching task by ID: " + taskId, e);
+    }
+}
 }
