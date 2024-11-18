@@ -60,4 +60,9 @@ public class TaskController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);  // Return 404 if task not found
         }
     }
+
+    @GetMapping("/TaskCount")
+    public int getTaskCount() {
+        return tserv.getTaskCount();
+    }
 }
