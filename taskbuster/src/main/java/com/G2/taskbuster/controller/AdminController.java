@@ -29,17 +29,17 @@ public class AdminController {
     @GetMapping("/getAllAdmins")
     public List<AdminEntity> getAllAdmins() {
         return adminServe.getAllAdmins();
-    }   
 
+    }
+    
     @CrossOrigin(origins = "/**") 
     @PostMapping("/adminLogin")
     public AdminEntity adminLogin(@RequestBody AdminEntity adminRequest) {
         try {
             return adminServe.loginAdmin(adminRequest.getEmail(), adminRequest.getPassword());
+
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
-
-
 }

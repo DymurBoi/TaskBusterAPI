@@ -45,8 +45,6 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user", cascade = CascadeType.ALL)
     //@JsonManagedReference // Manage the reference
 	private List<ToDoListEntity> toDolist;
-
-
     @ManyToOne
     @JoinColumn(name = "admin_id", referencedColumnName = "adminId", nullable = true)
     @JsonBackReference
