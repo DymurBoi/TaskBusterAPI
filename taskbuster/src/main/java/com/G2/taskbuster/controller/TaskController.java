@@ -3,6 +3,8 @@ package com.G2.taskbuster.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,5 +50,19 @@ public class TaskController {
      public List<TaskEntity> getTaskByToDoListID(@RequestParam int toDoListID) {
         return tserv.getTaskByToDoListID(toDoListID);
     }
-    
+    @GetMapping("getTask/{taskId}")
+    public ResponseEntity<TaskEntity> getTaskById(@PathVariable int taskId) {
+        try {
+            TaskEntity task = tserv.getTaskById(taskId);  // Calling service method to fetch the task by ID
+            return new ResponseEntity<>(task, HttpStatus.OK);  // Return the task with HTTP 200 OK status
+        } catch (RuntimeException e) {
+            // Handle exception and return an error response
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);  // Return 404 if task not found
+        }
+    }
+
+    @GetMapping("/TaskCount")
+    public int getTaskCount() {
+        return tserv.getTaskCount();
+    }
 }
