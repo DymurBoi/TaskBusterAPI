@@ -35,7 +35,6 @@ public class AdminService {
     public AdminEntity getAdminByEmail(String email) {
         return adminRepository.findByEmail(email); // Ensure this returns null if not found
     }
-    
     public AdminEntity loginAdmin(String email, String password) {
         AdminEntity admin = adminRepository.findByEmail(email);
         if (admin != null && admin.getPassword().equals(password)) {
@@ -43,6 +42,4 @@ public class AdminService {
         }
         throw new RuntimeException("Invalid email or password");
     }
-    
-
 }
