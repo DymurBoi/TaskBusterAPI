@@ -116,4 +116,10 @@ public class TaskService {
         throw new RuntimeException("Error occurred while fetching task by ID: " + taskId, e);
     }
 }
+
+    //Returns number of Task
+    public int getTaskCount() {
+        return (int) taskrepo.count();
+    }
+    
 }

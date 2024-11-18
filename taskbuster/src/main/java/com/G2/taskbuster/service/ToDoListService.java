@@ -87,5 +87,11 @@ public class ToDoListService {
     public List<ToDoListEntity> getToDosByUserId(int userId) {
         return toDoListRepository.findByUserUserId(userId);
     }
+
+    //Returns the number of ToDoLists
+    public int getToDoListCount() {
+        return (int) toDoListRepository.count();
+    }
+    
 }
 

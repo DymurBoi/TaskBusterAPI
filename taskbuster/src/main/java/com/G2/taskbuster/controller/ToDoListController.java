@@ -54,4 +54,8 @@ public class ToDoListController {
     public List<ToDoListEntity> getToDosByUserId(@RequestParam int userId) {
     return toDoListService.getToDosByUserId(userId);
 }
+    @GetMapping("/ToDoListCount")
+    public int getUserCount() {
+        return toDoListService.getToDoListCount();
+}
 }

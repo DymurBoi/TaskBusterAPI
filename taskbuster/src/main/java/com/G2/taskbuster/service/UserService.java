@@ -117,5 +117,10 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));
     }
 
+    //Returns the number of User
+    public int getUserCount() {
+        return (int) userRepository.count();
+    }
 }
+
 
